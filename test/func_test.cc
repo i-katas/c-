@@ -1,8 +1,10 @@
 #include "gtest/gtest.h"
 
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wreturn-type"
 bool function(void) {
 }
+#pragma GCC diagnostic pop
 
 TEST(Function, returns_zero_if_statement_is_missing) {
   ASSERT_EQ(0, function());
