@@ -1,6 +1,8 @@
 .DEFAULT_GOAL=build
 SHELL := bash
 CPPFLAGS+=-Iext/include
+CXXFLAGS+=-pedantic-errors
+CXXFLAGS+=-Wsign-conversion -Wextra -Werror
 
 GTEST_LIBS=ext/libs
 TEST_DIR=test
