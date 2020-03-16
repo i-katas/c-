@@ -1,3 +1,4 @@
+.PHONY:test
 .DEFAULT_GOAL=build
 SHELL := bash
 CPPFLAGS+=-Iext/include
@@ -24,11 +25,11 @@ ${OUT_DIR}/gtest: ${TEST_LINK_FILES}
 
 link: ${OUT_DIR}/gtest
 
-check:
+test:
 	ldd ${OUT_DIR}/gtest
 	@${CHECK_CMD}
 
-build: link check
+build: link test
 
 clean:
 	@rm ${OUT_DIR} -rf
