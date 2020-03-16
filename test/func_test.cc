@@ -37,3 +37,48 @@ TEST(Function, pass_by_reference) {
   ASSERT_EQ(6, tripled(n));
   ASSERT_EQ(6, n);
 }
+
+
+
+int return2() {
+  return 1;
+  return 2; //unreachable
+}
+
+TEST(Function, multiple_return_statements) {
+  ASSERT_EQ(1, return2());
+}
+
+
+
+//remove the below function declaration will resulting the compiler to fail
+int sum(int, int);
+
+TEST(Function, forward_declarations) {
+  ASSERT_EQ(5, sum(2, 3));
+}
+
+int sum(int a, int b) {
+  return a + b;
+}
+
+
+
+//bind function calls at compiler stage if the forward declaration exists
+int run(double);
+
+TEST(Function, bind_forward_declaration_at_compile_stage) {
+  //call run(double) rather than run(int)
+  ASSERT_EQ(10, run(5));
+}
+
+
+
+int run(double);
+int run(double);
+
+TEST(Function, declaration_can_be_uplicated) {
+  //call run(double) rather than run(int)
+  ASSERT_EQ(10, run(5));
+}
+
