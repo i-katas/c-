@@ -77,7 +77,7 @@ TEST(Function, bind_forward_declaration_at_compile_stage) {
 int run(double);
 int run(double);
 
-TEST(Function, declaration_can_be_uplicated) {
+TEST(Function, declaration_can_be_duplicated) {
   //call run(double) rather than run(int)
   ASSERT_EQ(10, run(5));
 }

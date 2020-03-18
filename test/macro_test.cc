@@ -41,3 +41,13 @@ TEST(Macro, use_if_0_to_skip_compilation) {
   #endif
 }
 
+
+TEST(Macro, include_header_files) {
+  #include "run.h"
+
+  ASSERT_EQ(5, run(5));
+  ASSERT_EQ(10, run(5.2));
+}
+
+
+

@@ -1,3 +1,5 @@
+#include "run.h"
+
 int run(int a) {
   return a;
 }
