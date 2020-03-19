@@ -4,6 +4,7 @@ SHELL := bash
 CPPFLAGS+=-Iext/include
 #CXXFLAGS+=-pedantic-errors
 #CXXFLAGS+=-Wsign-conversion -Wextra -Werror
+CXXFLAGS+=-std=c++1z
 CXXFLAGS+=-Wall
 
 GTEST_LIBS=ext/libs
