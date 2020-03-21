@@ -51,3 +51,33 @@ TEST(Variable, narrowing_conversion) {
   int b{(int)3.9}; 
   ASSERT_EQ(3, b);
 }
+
+
+TEST(Variable, name_shadowing) {
+  int value{2};
+
+  {
+    ASSERT_EQ(2, value);
+    int value{3};
+
+    ASSERT_EQ(3, value++);
+  }
+
+  ASSERT_EQ(2, value);
+}
+
+
+static int bValue();
+static const int i{bValue()};
+static constexpr int b{2};
+
+static int bValue() {
+  return b;
+}
+
+TEST(Variable, static_initialization_first) {
+  ASSERT_EQ(2, i);
+  ASSERT_EQ(2, b);
+}
+
+
