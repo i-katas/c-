@@ -81,3 +81,13 @@ TEST(Variable, static_initialization_first) {
 }
 
 
+int tick() {
+  static int tick{1};
+  return tick++;
+}
+TEST(Variable, static_local_variables_change_duration) {
+  ASSERT_EQ(1, tick());
+  ASSERT_EQ(2, tick());
+}
+
+
