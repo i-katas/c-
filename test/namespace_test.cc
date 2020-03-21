@@ -39,3 +39,18 @@ TEST(Namespace, alias_namespace) {
 
   ASSERT_EQ(x::code, c::code);
 }
+
+
+namespace foo {
+  const int a = 1;
+}
+namespace foo {
+  const int b = 2;
+}
+
+TEST(Namespace, merge_namespace_definitions) {
+  ASSERT_EQ(1, foo::a);
+  ASSERT_EQ(2, foo::b);
+}
+
+
