@@ -19,7 +19,10 @@ ${OUT_DIR}:
 	@mkdir ${OUT_DIR}
 
 ${OUT_DIR}/%.o: ${OUT_DIR}
-	$(CXX) ${CPPFLAGS} ${CXXFLAGS} -c ${TEST_DIR}/$*.cc -o $@
+	@if [ "${TEST_DIR}/$*.cc" -nt "$@" ]; then \
+		echo $(CXX) ${CPPFLAGS} ${CXXFLAGS} -c ${TEST_DIR}/$*.cc -o $@; \
+		$(CXX) ${CPPFLAGS} ${CXXFLAGS} -c ${TEST_DIR}/$*.cc -o $@; \
+		fi
 
 ${OUT_DIR}/gtest: ${TEST_LINK_FILES}
 	$(CXX) -L${GTEST_LIBS} -lgtest_main -lgtest-all ${OUT_DIR}/*.o -o ${CHECK_CMD}
