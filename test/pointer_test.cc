@@ -59,3 +59,32 @@ TEST(Pointer, using_scaling_to_iterate_an_array) {
 }
 
 
+TEST(Pointer, pointer_to_const_value) {
+  const int value{ 5 };
+
+  const int *ptr{ &value };
+
+  ASSERT_EQ(5, *ptr);
+}
+
+
+TEST(Pointer, const_value_pointer) {
+  int value{ 5 };
+
+  const int *ptr{ &value };
+
+  value = 6;
+  ASSERT_EQ(6, *ptr);
+}
+
+
+TEST(Pointer, const_pointer) {
+  int value{ 5 };
+
+  int *const ptr{ &value };
+
+  //ptr = &value; //compiler error
+  ASSERT_EQ(5, *ptr);
+}
+
+
