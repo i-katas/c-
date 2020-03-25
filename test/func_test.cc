@@ -82,3 +82,13 @@ TEST(Function, declaration_can_be_duplicated) {
   ASSERT_EQ(10, run(5));
 }
 
+
+static inline int plus(int a, int b) {
+  return a + b;
+}
+
+TEST(Function, inline_function_code_into_callsite) {
+  ASSERT_EQ(3, plus(1, 2));
+}
+
+
