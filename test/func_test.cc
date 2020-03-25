@@ -11,41 +11,12 @@ TEST(Function, returns_zero_if_statement_is_missing) {
 }
 
 
-//make parameters immutable through pass by value
-int triple(int n) {
-  n *= 3;
-  return n;
-}
-
-TEST(Function, pass_by_value) {
-  int n = 2;
-
-  ASSERT_EQ(6, triple(n));
-  ASSERT_EQ(2, n);
-}
-
-
-//make parameters mutable through pass by reference
-int tripled(int& n) {
-  n *= 3;
-  return n;
-}
-
-TEST(Function, pass_by_reference) {
-  int n = 2;
-
-  ASSERT_EQ(6, tripled(n));
-  ASSERT_EQ(6, n);
-}
-
-
-
 int return2() {
   return 1;
   return 2; //unreachable
 }
 
-TEST(Function, multiple_return_statements) {
+TEST(Function, return_immediately_if_contains_multiple_return_statements) {
   ASSERT_EQ(1, return2());
 }
 
@@ -54,7 +25,7 @@ TEST(Function, multiple_return_statements) {
 //remove the below function declaration will resulting the compiler to fail
 int sum(int, int);
 
-TEST(Function, forward_declarations) {
+TEST(Function, create_forward_declarations_to_avoid_compile_error_when_the_called_function_define_after_itself) {
   ASSERT_EQ(5, sum(2, 3));
 }
 
@@ -77,7 +48,7 @@ TEST(Function, bind_forward_declaration_at_compile_stage) {
 int run(double);
 int run(double);
 
-TEST(Function, declaration_can_be_duplicated) {
+TEST(Function, function_declaration_can_be_duplicated) {
   //call run(double) rather than run(int)
   ASSERT_EQ(10, run(5));
 }

@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
 
-TEST(Boolean, initialize_boolean_variable) {
+TEST(Boolean, initialize_with_boolean_literals) {
     bool truth{true};
     bool falsy{false};
 
@@ -10,7 +10,7 @@ TEST(Boolean, initialize_boolean_variable) {
 }
 
 
-TEST(Boolean, initialize_boolean_variable_with_integer_value) {
+TEST(Boolean, initialize_with_integer_literals) {
     bool truth{1};
     bool falsy{0};
 

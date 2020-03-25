@@ -24,7 +24,7 @@ TEST(Constants, random_sized_array) {
 }
 
 
-TEST(Constants, compile_time_constant_expression) {
+TEST(Constants, compile_time_constant_expression_must_be_initialized_with_compile_time_constants) {
     constexpr int size{ 10 };
     //constexpr int randomSize{ rand() % 10 }; //compiler error
 
@@ -34,12 +34,12 @@ TEST(Constants, compile_time_constant_expression) {
 
 //inline constexpr only avaiable with c++1z
 inline constexpr double PI{ 3.1415926 };
-TEST(Constants, inlining_constant_expression) {
+TEST(Constants, inlining_constant_expression_into_callsite) {
     //inline constexpr int size{ 10 }; //inline constexpr can't be declared as local variables
     ASSERT_EQ(3.1415926, PI);
 }
 
-TEST(Constants, preprocessor_macro_symbolic_constant) {
+TEST(Constants, preprocessor_macro_symbolic_constant_will_be_replaced_in_translation_stage_before_the_compile_stage) {
     {
         //`size` will be replace with literal number 5 by preprocessor after the definition
         #define size 5

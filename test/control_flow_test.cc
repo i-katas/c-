@@ -15,7 +15,7 @@ TEST(ControlFlow, if_init_statement) {
 TEST(ControlFlow, null_statement) {
     int a{1};
 
-    while(++a < 10);
+    while(++a < 10)/*null statement ends with semi only*/;
 
     ASSERT_EQ(10, a);
 }

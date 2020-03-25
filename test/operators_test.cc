@@ -10,7 +10,7 @@ TEST(Operators, static_cast) {
 }
 
 
-TEST(Operators, comma_operator) {
+TEST(Operators, compute_all_exppressions_in_comma_operator_and_return_the_value_of_the_last_expression) {
     int x{1}, y{2};
     int a{(++x, ++y)};
 

@@ -12,10 +12,12 @@ using std::string;
 string stack();
 
 TEST(Macro, conditional) {
+  #define fuzz 
+  //uncomment the line below will makes the test failed
+  //#define buzz 
   ASSERT_EQ("fuzz", stack());
 }
 
-#define fuzz 
 string stack() {
   string stack{""};
 
@@ -35,7 +37,7 @@ string stack() {
 }
 
 
-TEST(Macro, use_if_0_to_skip_compilation) {
+TEST(Macro, use_if_0_to_skip_compiling) {
   #if 0
     undefinedVar = 5;
   #endif

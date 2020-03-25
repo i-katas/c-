@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
 
-TEST(BasicTypes, size) {
+TEST(BasicTypes, allocated_memory_size_as_bytes) {
     ASSERT_EQ(1u, sizeof(bool));
     ASSERT_EQ(1u, sizeof(char));
     ASSERT_EQ(2u, sizeof(short));

@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
 
-TEST(Pointer, derefernceing) {
+TEST(Pointer, dereferencing) {
   auto s = "abc";
   const char **buff{&s};
 
@@ -20,16 +20,18 @@ TEST(Pointer, function_pointer_type) {
 }
 
 
-TEST(Pointer, call_member_function) {
+TEST(Pointer, use_arrow_operator_to_access_member_function) {
   std::string s{"value"};
 
   std::string *ptr{&s};
 
   ASSERT_EQ(5u, ptr->length());
+  //equality
+  ASSERT_EQ(5u, (*ptr).length());
 }
 
 
-TEST(Pointer, reassign_value_to_pointer) {
+TEST(Pointer, change_value_by_pointer) {
   int value{1};
   int *ptr{&value};
 
@@ -47,7 +49,7 @@ TEST(Pointer, null_pointer) {
 }
 
 
-TEST(Pointer, using_scaling_to_iterate_an_array) {
+TEST(Pointer, using_scaling_to_iterate_an_array_because_array_will_use_consequence_memory_address_to_save_its_own_data) {
   int array[]{9, 8, 7};
 
   int *first { array };

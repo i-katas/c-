@@ -56,6 +56,17 @@ TEST(Numbers, integer_division_will_drop_any_fractional_portion) {
 }
 
 
+TEST(Numbers, divide_by_zero_will_be_crash) {
+    int zero { 0 };
+
+    #if 0
+    int a { 5 / zero };
+    #endif
+
+    ASSERT_EQ(0, zero);
+}
+
+
 TEST(Numbers, unsigned_number_will_be_wrapped_around_the_range) {
     //unsigned short range: [0, 0xffff]
     ASSERT_EQ((0x10000 - 1) % 0xffff, (unsigned short)0x10000);
