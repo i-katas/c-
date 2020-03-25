@@ -48,7 +48,7 @@ TEST(Function, bind_forward_declaration_at_compile_stage) {
 int run(double);
 int run(double);
 
-TEST(Function, function_declaration_can_be_duplicated) {
+TEST(Function, declaration_can_be_duplicated) {
   //call run(double) rather than run(int)
   ASSERT_EQ(10, run(5));
 }
@@ -60,6 +60,47 @@ static inline int plus(int a, int b) {
 
 TEST(Function, inline_function_code_into_callsite) {
   ASSERT_EQ(3, plus(1, 2));
+}
+
+
+static int option(int a = -1) {
+  return a;
+}
+TEST(Function, optional_parameter_with_default_value) {
+  ASSERT_EQ(1, option(1));
+  ASSERT_EQ(-1, option());
+}
+
+
+static int repeat(int a = 1);
+static int repeat(int a/* = 1*/) {
+  return a;
+}
+TEST(Function, default_parameter_can_not_duplicated_between_declaration_and_definition) {
+  ASSERT_EQ(2, repeat(2));
+  ASSERT_EQ(1, repeat());
+}
+
+
+struct Place {
+  int code = 0;
+};
+static Place global_place{};
+static Place location(Place place = global_place) {
+  return place;
+}
+
+TEST(Function, copy_value_for_default_parameter_of_every_callsite) {
+  Place first{ location() };
+  Place second{ location() };
+
+  first.code = 1;
+
+  ASSERT_EQ(0, second.code);
+  ASSERT_EQ(1, first.code);
+  ASSERT_NE(&first, &second);
+  ASSERT_NE(&global_place, &first);
+  ASSERT_NE(&global_place, &second);
 }
 
 
