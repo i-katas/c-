@@ -88,3 +88,39 @@ TEST(Pointer, const_pointer) {
 }
 
 
+TEST(Pointer, void_pointer_can_point_to_any_type_pointer_but_can_not_dereference_directly) {
+  std::string s{ "string" };
+
+  void *ptr = &s;
+  //ASSERT_EQ("string", *ptr); //compiler error
+
+  std::string *s_ptr { static_cast<std::string*>(ptr) };
+
+  ASSERT_EQ("string", *s_ptr);
+}
+
+
+TEST(Pointer, point_to_a_pointer) {
+  std::string s{ "string" };
+  std::string *ptr = &s;
+
+  std::string **ptrptr = &ptr;
+
+  ASSERT_EQ("string", **ptrptr);
+}
+
+
+TEST(Pointer, dynamic_2_dimensional_array_creation) {
+  int **array = { new int*[2] };
+  *(array) = new int[3];
+
+  *(*array + 2) = 1;
+
+  ASSERT_EQ(1, array[0][2]);
+
+  delete [] array[0];
+  delete [] array[1];
+  delete []array;
+}
+
+
