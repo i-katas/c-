@@ -20,6 +20,31 @@ TEST(Pointer, function_pointer_type) {
 }
 
 
+TEST(Pointer, alias_function_pointer_type_with_typedef) {
+  typedef int(*Eval)(double);
+
+  Eval eval { run };
+
+  ASSERT_EQ(10, eval(5));
+}
+
+
+TEST(Pointer, alias_function_pointer_type_with_using_statement) {
+  using Eval = int(*)(double);
+
+  Eval eval { run };
+
+  ASSERT_EQ(10, eval(5));
+}
+
+
+TEST(Pointer, using_std_function_to_define_function_pointer) {
+  std::function<int(double)> eval{ run };
+
+  ASSERT_EQ(10, eval(5));
+}
+
+
 TEST(Pointer, use_arrow_operator_to_access_member_function) {
   std::string s{"value"};
 
