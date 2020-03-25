@@ -62,7 +62,12 @@ TEST(FixedArray, use_constexpr_constant_to_create_a_fixed_array) {
 
 
 static unsigned int arraySize(const int array[]) { //alternative: const int *array
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wsizeof-array-argument"
+
     return sizeof(array); // size of the pointer rather than the size of the array
+
+    #pragma GCC diagnostic pop
 }
 TEST(FixedArray, array_decay_into_a_pointer) {
     int array[5];
