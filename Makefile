@@ -29,11 +29,15 @@ ${OUT_DIR}/gtest: ${TEST_LINK_FILES}
 
 link: ${OUT_DIR}/gtest
 
-test:
+test: clear
+	
 	ldd ${OUT_DIR}/gtest
 	@${CHECK_CMD}
 
-build: link test
+build: clear link test
+
+clear:
+	-@tput reset
 
 clean:
 	@rm ${OUT_DIR} -rf
