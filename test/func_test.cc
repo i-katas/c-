@@ -104,3 +104,48 @@ TEST(Function, copy_value_for_default_parameter_of_every_callsite) {
 }
 
 
+
+#include <cstdarg>
+static const int sentinel = -1;
+static int sum_sentinel(int first, ...) {
+  int sum{ 0 };
+  sum += first;
+  va_list args;
+  va_start(args, first);
+  while(true) {
+    int n = va_arg(args, int);
+    if(n == sentinel) {
+      break;
+    } 
+    sum += n;
+  }
+  va_end(args);
+  return sum;
+}
+
+TEST(Function, avoid_to_use_sentinel_based_ellipses_arguments_since_no_type_checking_at_compile_time) {
+  ASSERT_EQ(1, sum_sentinel(1, sentinel));
+  ASSERT_EQ(3, sum_sentinel(1, 2, sentinel));
+  ASSERT_EQ(6, sum_sentinel(1, 2, 3, sentinel));
+}
+
+
+static int nsum(int n...) {
+  int sum { 0 };
+  va_list args;
+
+  va_start(args, n);
+  while(--n >= 0) {
+    sum += va_arg(args, int);
+  }
+  va_end(args);
+
+  return sum;
+}
+
+TEST(Function, avoid_to_use_size_based_ellipses_arguments_since_no_type_checking_at_compile_time) {
+  ASSERT_EQ(0, nsum(0));
+  ASSERT_EQ(1, nsum(1, 1));
+  ASSERT_EQ(3, nsum(2, 1, 2));
+}
+
