@@ -30,28 +30,11 @@ TEST(Class, member_types) {
 }
 
 
-
-class Cart {
-    using price_t = double;
-    price_t price = 0;
-    int qty = 0;
-
-    public:
-        void add(price_t price, int qty) {
-            this->price += price * qty;
-            this->qty += qty;
-        }
-
-        price_t totalPrice() {
-            return price;
-        }
-
-        price_t totalQuantity() {
-            return qty;
-        }
-};
+#include "cart.h"
 TEST(Class, private_members) {
-    Cart cart{};
+    Cart cart;
+    ASSERT_EQ(0, cart.totalQuantity());
+    ASSERT_EQ(0., cart.totalPrice());
 
     cart.add(2.5, 3);
     ASSERT_EQ(7.5, cart.totalPrice());
