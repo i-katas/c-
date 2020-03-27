@@ -4,8 +4,8 @@ class Cart {
     public:
         using price_t = double;
         void add(price_t price, int qty); 
-        price_t totalPrice();
-        price_t totalQuantity();
+        price_t totalPrice() const;
+        price_t totalQuantity() const;
     private:
         price_t price { 0 };
         int qty{ 0 };

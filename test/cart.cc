@@ -6,10 +6,10 @@ void Cart::add(price_t price, int qty) {
     self.qty += qty;
 }
 
-Cart::price_t Cart::totalPrice() {
+Cart::price_t Cart::totalPrice() const {
     return price;
 }
 
-Cart::price_t Cart::totalQuantity() {
+Cart::price_t Cart::totalQuantity() const {
     return qty;
 }

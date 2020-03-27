@@ -45,3 +45,23 @@ TEST(Class, private_members) {
     ASSERT_EQ(5, cart.totalQuantity());
     //ASSERT_EQ(5, cart.qty); //compile error
 }
+
+
+TEST(Class, const_class_objects_can_not_reassigned_and_change_any_member_fields) {
+    const Cart cart;
+
+    ASSERT_EQ(0, cart.totalQuantity());
+    ASSERT_EQ(0., cart.totalPrice());
+}
+
+
+TEST(Class, copy_class_objects) {
+    Cart cart;
+    cart.add(2.5, 3);
+
+    Cart snapshot { cart };
+    cart.add(1, 2);
+
+    ASSERT_EQ(7.5, snapshot.totalPrice());
+    ASSERT_EQ(9.5, cart.totalPrice());
+}
