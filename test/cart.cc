@@ -1,6 +1,6 @@
 #include "cart.h"
 
-int Cart::version { 0 };
+int Cart::version; //zero-initialization if no initializer exists
 
 void Cart::add(price_t price, int qty) {
     Cart &self = *this;
