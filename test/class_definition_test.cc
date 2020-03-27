@@ -65,3 +65,13 @@ TEST(Class, copy_class_objects) {
     ASSERT_EQ(7.5, snapshot.totalPrice());
     ASSERT_EQ(9.5, cart.totalPrice());
 }
+
+
+TEST(Class, class_variable_shared_between_objects) {
+    Cart cart, cart2;
+    ASSERT_EQ(0, cart2.version);
+
+    cart.version = 1;
+
+    ASSERT_EQ(1, cart2.version);
+}

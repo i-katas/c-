@@ -1,5 +1,7 @@
 #include "cart.h"
 
+int Cart::version { 0 };
+
 void Cart::add(price_t price, int qty) {
     Cart &self = *this;
     self.price += price * qty;
