@@ -14,3 +14,8 @@ Cart::price_t Cart::totalPrice() const {
 Cart::price_t Cart::totalQuantity() const {
     return qty;
 }
+
+void reset(Cart& cart) {
+    cart.price = 0;
+    cart.qty = 0;
+}

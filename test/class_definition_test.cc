@@ -75,3 +75,14 @@ TEST(Class, class_variable_shared_between_objects) {
 
     ASSERT_EQ(1, cart2.version);
 }
+
+
+TEST(Class, use_friend_function_to_access_class_private_members) {
+    Cart cart;
+    cart.add(1.5, 2);
+
+    reset(cart);
+
+    ASSERT_EQ(0, cart.totalQuantity());
+    ASSERT_EQ(0, cart.totalPrice());
+}
