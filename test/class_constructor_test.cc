@@ -69,7 +69,7 @@ TEST(Constructor, create_class_instance_with_custom_constructor) {
 }
 
 
-TEST(Constructor, class_type_member_fields_will_be_initialized_even_if_they_do_not_initialized_explictly) {
+TEST(Constructor, class_type_member_fields_will_be_initialized_even_if_they_do_not_initialized_explicitly) {
     static std::string log {""};
 
     class Profile {
@@ -159,6 +159,46 @@ TEST(Constructor, delegating_constructor_to_another_constructor_to_avoid_overlap
 
     ASSERT_EQ(1.5, Item(1.5).totalPrice());
     ASSERT_EQ(4.5, Item(1.5, 3).totalPrice());
+}
+
+
+TEST(Constructor, prevent_implicit_conversion_by_make_constructor_explicit) {
+    class String {
+        std::string s;
+        public:
+            explicit String(int value): s{ std::to_string(value) }  {
+            }
+
+            String(const char *str): s{ static_cast<std::string>(str) } {
+            }
+
+            const std::string& toString() {
+                return s;
+            }
+    };
+    
+    //String s = 'x'; //compile time error: can't be convert implicitly
+    String direct('x'); //convert explicit
+    ASSERT_EQ("120", direct.toString()) << "String(int) should be called explicit";
+}
+
+
+TEST(Constructor, prevent_all_conversions_by_mark_constructor_as_deleted) {
+    class String {
+        std::string s;
+        public:
+            String(char) = delete;
+            String(const char *str): s{ static_cast<std::string>(str) } {
+            }
+
+            const std::string& toString() {
+                return s;
+            }
+    };
+    
+    //String s = 'x'; //compile time error: can't be convert implicitly
+    //String direct('x'); //compile time error: can't be convert explicit
+    ASSERT_EQ("abc", String("abc").toString());
 }
 
 

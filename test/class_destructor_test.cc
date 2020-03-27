@@ -10,7 +10,7 @@ class Garbdge {
 };
 
 
-TEST(Destructor, should_be_called_if_destroy_dynamic_aollocated_object_explictly) {
+TEST(Destructor, should_be_called_if_destroy_dynamic_aollocated_object_explicitly) {
     bool destroyed { false };
     Garbdge *garbdge{ new Garbdge{ destroyed } };
 
